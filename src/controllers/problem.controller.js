@@ -21,27 +21,62 @@ async function addProblem(req, res, next) {
 }
 
 async function getProblem(req, res, next) {
-  return res
-    .status(StatusCodes.NOT_IMPLEMENTED)
-    .json({ message: "Not implemented" });
+  try {
+    const problem = await problemService.getProblem(req.params.id);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Successfully fetched the problem",
+      error: {},
+      data: problem,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 async function getProblems(req, res, next) {
-  return res
-    .status(StatusCodes.NOT_IMPLEMENTED)
-    .json({ message: "Not implemented" });
+  try {
+    const problems = await problemService.getAllProblems();
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Successfully fetched all the problems",
+      error: {},
+      data: problems,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 async function deleteProblem(req, res, next) {
-  return res
-    .status(StatusCodes.NOT_IMPLEMENTED)
-    .json({ message: "Not implemented" });
+  try {
+    const deletedProblem = await problemService.deleteProblem(req.params.id);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Successfully deleted the problem",
+      error: {},
+      data: deletedProblem,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 async function updateProblem(req, res, next) {
-  return res
-    .status(StatusCodes.NOT_IMPLEMENTED)
-    .json({ message: "Not implemented" });
+  try {
+    const updatedProblem = await problemService.updateProblem(
+      req.params.id,
+      req.body
+    );
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Successfully updated the problem",
+      error: {},
+      data: updatedProblem,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 module.exports = {
